@@ -83,10 +83,7 @@ public class Sheep {
             for (int i = 0; i < 3; i++) {
                 nearPoints[i + size * 3 + 3] = new Point(points[size - 1].x + i - 1, points[size - 1].y + 1);
             }
-
-
         } else {
-
             for (int i = 0; i < size; i++) {
                 nearPoints[i] = new Point(points[i].x, points[i].y - 1);
             }
@@ -102,16 +99,10 @@ public class Sheep {
             for (int i = 0; i < 3; i++) {
                 nearPoints[i + size * 3 + 3] = new Point(points[size - 1].x + 1, points[size - 1].y + i - 1);
             }
-
         }
-
         for (int i = 0; i < maxNumbersCellsNearSheep; i++) {
-
             System.out.println(nearPoints[i]);
-
         }
-
-
     }
 
 

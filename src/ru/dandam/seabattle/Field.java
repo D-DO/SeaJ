@@ -10,6 +10,25 @@ public class Field {
     Point tempPositionTopLeftOfSheep = new Point();
     Point[] tempPointsOfSheep;//// массив координат ячеек корабля
 
+    public Field() {
+        initCells();
+    }
+
+    public void initCells() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                cells[i][j] = new Cell(i, j);
+            }
+        }
+    }
+
+    public void initCellsVisible(boolean visible) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                cells[i][j].setVisible(visible);
+            }
+        }
+    }
 
     public void getRandomPoint(int sizeSheep, boolean horizontal) {
         Random random = new Random();
@@ -21,10 +40,10 @@ public class Field {
             tempPositionTopLeftOfSheep.x = random.nextInt(10);
             tempPositionTopLeftOfSheep.x = random.nextInt(10 - sizeSheep + 1);
         }
-        if (sizeSheep == 4) {
-            tempPositionTopLeftOfSheep.y = 0;
-            tempPositionTopLeftOfSheep.x = 0;
-        }
+//        if (sizeSheep == 4) {
+//            tempPositionTopLeftOfSheep.y = 0;
+//            tempPositionTopLeftOfSheep.x = 0;
+//        }
     }
 
     public void initPoints(int sizeSheep, Point positionTopLeft, boolean horizontal) {
@@ -68,7 +87,7 @@ public class Field {
                 for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
                     // if (cellsUser1[column[j].points[k].x][column[j].points[k].y].getSheep() == null) {
                     cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].setNearSheep(true);
-                    System.out.println(column[j].nearPoints[k].x + " " + column[j].nearPoints[k].y + " #");
+//                    System.out.println(column[j].nearPoints[k].x + " " + column[j].nearPoints[k].y + " #");
                     //   }
 
                 }
@@ -81,23 +100,35 @@ public class Field {
     }
 
     public void isKilledSheep() {
-
-
         for (int i = 0; i < sheep.length; i++) {
             Sheep[] column = sheep[i];
             for (int j = 0; j < column.length; j++) {
 
                 for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
 
-                    if (column[j].isKilled()){
+                    if (column[j].isKilled()) {
                         cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].yesShoot();
                     }
 
                 }
-//                for (int k = 0; k < column[j].getSize(); k++) {
-//                    cells[column[j].points[k].x][column[j].points[k].y].setSheep(column[j]);
-//                }
             }
+        }
+    }
+
+    public boolean isOver() {
+        int count = 0;
+        for (int i = 0; i < sheep.length; i++) {
+            Sheep[] column = sheep[i];
+            for (int j = 0; j < column.length; j++) {
+                if (column[j].isKilled()) {
+                    count++;
+                }
+            }
+        }
+        if (count == 10) {
+            return true;
+        } else {
+            return false;
         }
 
     }
@@ -112,24 +143,14 @@ public class Field {
                             ) {
                         System.out.println("Пересекает");
                         return true;
-
                     }
                 }
-
             }
         }
         System.out.println("Ok");
         return false;
     }
 
-
-    public void initCells() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                cells[i][j] = new Cell(i, j);
-            }
-        }
-    }
 
     public void printCells() {
         printHeadNumber(1);
@@ -139,7 +160,7 @@ public class Field {
 
             for (int j = 0; j < 10; j++) {
                 if (j == 0) {
-                    System.out.print("   " + cells[i][j].getAlphabeticDes() + " ");
+                    System.out.print("   " + cells[i][j].getAlphabeticX() + " ");
                 }
 
                 System.out.print(cells[i][j].getShowingCell());
