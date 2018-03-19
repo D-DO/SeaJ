@@ -95,8 +95,9 @@ public class GameWindow extends JFrame {
         jPaneCenter.add(jPanelRight);
 
         add(jPanelBottom, BorderLayout.SOUTH);
+        jPanelBottom.add(jTextFieldWin);
 
-//        jTextFieldWin.setText("                                                                 ");
+        jTextFieldWin.setText("                                                           ");
         setVisible(true);
 
     }
