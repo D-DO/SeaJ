@@ -30,36 +30,7 @@ public class Sheep {
     }
 
     private void getCellsNearSheep() {
-//         numbersCellsNearSheep = size * 2 + 6;
-
-//        if (isHorizontal()) {
-//            if (getPositionTopLeft().x == 0) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - (size + 2);
-//            }
-//            if (getPositionTopLeft().y == 0) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - 3;
-//            }
-//            if (getPositionBottomRight().x == 9) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - (size + 2);
-//            }
-//            if (getPositionBottomRight().y == 9) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - 3;
-//            }
-//        } else {
-//            if (getPositionTopLeft().x == 0) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - 3;
-//            }
-//            if (getPositionTopLeft().y == 0) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - (size + 2);
-//            }
-//            if (getPositionBottomRight().x == 9) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - 3;
-//            }
-//            if (getPositionBottomRight().y == 9) {
-//                numbersCellsNearSheep = numbersCellsNearSheep - (size + 2);
-//            }
 //
-//        }
         numbersCellsNearSheep = size * 3 + 6;
         nearPoints = new Point[numbersCellsNearSheep];
         if (isHorizontal()) {
@@ -137,10 +108,7 @@ public class Sheep {
 
             printS();
 
-        }
-
-
-        return tempPpoint;
+        }        return tempPpoint;
 
 
     }

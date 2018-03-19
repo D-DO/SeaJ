@@ -25,7 +25,6 @@ public class Cell {
         alphabeticDes = getCellChar(x);
         isShoot = false;
         sheep = null;
-
         showingCell = showCell();
     }
 
@@ -104,4 +103,6 @@ public class Cell {
     public void setNearSheep(boolean nearSheep) {
         this.nearSheep = nearSheep;
     }
+
+
 }
