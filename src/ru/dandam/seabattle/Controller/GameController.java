@@ -11,7 +11,7 @@ public class GameController {
 
 
     public static void doShootFromWindow(Point point) {
-        Game.user2.field.cells[point.x][point.y].yesShoot();
+        Game.user2.field.cells[point.getX()][point.getY()].yesShoot();
         Game.user2.setShoot();
     }
 

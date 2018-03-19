@@ -8,7 +8,7 @@ public class Field {
     private String name;
     private int size;
     Sheep[][] sheep;
-   public Cell[][] cells = new Cell[10][10];
+    public Cell[][] cells = new Cell[10][10];
     Point tempPositionTopLeftOfSheep = new Point();
     Point[] tempPointsOfSheep;//// массив координат ячеек корабля
 
@@ -56,29 +56,29 @@ public class Field {
         Random random = new Random();
 
         if (horizontal) {
-            tempPositionTopLeftOfSheep.y = random.nextInt(10 - sizeSheep + 1);
-            tempPositionTopLeftOfSheep.x = random.nextInt(10);
+            tempPositionTopLeftOfSheep.setY(random.nextInt(10 - sizeSheep + 1));
+            tempPositionTopLeftOfSheep.setX(random.nextInt(10));
         } else {
-            tempPositionTopLeftOfSheep.x = random.nextInt(10);
-            tempPositionTopLeftOfSheep.x = random.nextInt(10 - sizeSheep + 1);
+            tempPositionTopLeftOfSheep.setX(random.nextInt(10));
+            tempPositionTopLeftOfSheep.setX(random.nextInt(10 - sizeSheep + 1));
         }
 //        if (sizeSheep == 4) {
-//            tempPositionTopLeftOfSheep.y = 0;
-//            tempPositionTopLeftOfSheep.x = 0;
+//            tempPositionTopLeftOfSheep.getY() = 0;
+//            tempPositionTopLeftOfSheep.getX() = 0;
 //        }
     }
 
     public void initPoints(int sizeSheep, Point positionTopLeft, boolean horizontal) {
         tempPointsOfSheep = new Point[sizeSheep];
         if (horizontal) {
-            tempPointsOfSheep[0] = new Point(positionTopLeft.x, positionTopLeft.y); // массив координат ячеек корабля
+            tempPointsOfSheep[0] = new Point(positionTopLeft.getX(), positionTopLeft.getY()); // массив координат ячеек корабля
             for (int i = 1; i < sizeSheep; i++) {
-                tempPointsOfSheep[i] = new Point(positionTopLeft.x, positionTopLeft.y + i);
+                tempPointsOfSheep[i] = new Point(positionTopLeft.getX(), positionTopLeft.getY() + i);
             }
         } else {
-            tempPointsOfSheep[0] = new Point(positionTopLeft.x, positionTopLeft.y);
+            tempPointsOfSheep[0] = new Point(positionTopLeft.getX(), positionTopLeft.getY());
             for (int i = 1; i < sizeSheep; i++) {
-                tempPointsOfSheep[i] = new Point(positionTopLeft.x + i, positionTopLeft.y);
+                tempPointsOfSheep[i] = new Point(positionTopLeft.getX() + i, positionTopLeft.getY());
             }
         }
     }
@@ -107,14 +107,14 @@ public class Field {
 
 
                 for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
-                    // if (cellsUser1[column[j].points[k].x][column[j].points[k].y].getSheep() == null) {
-                    cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].setNearSheep(true);
-//                    System.out.println(column[j].nearPoints[k].x + " " + column[j].nearPoints[k].y + " #");
+                    // if (cellsUser1[column[j].points[k].getX()][column[j].points[k].getY()].getSheep() == null) {
+                    cells[column[j].nearPoints[k].getX()][column[j].nearPoints[k].getY()].setNearSheep(true);
+//                    System.out.println(column[j].nearPoints[k].getX() + " " + column[j].nearPoints[k].getY() + " #");
                     //   }
 
                 }
                 for (int k = 0; k < column[j].getSize(); k++) {
-                    cells[column[j].points[k].x][column[j].points[k].y].setSheep(column[j]);
+                    cells[column[j].points[k].getX()][column[j].points[k].getY()].setSheep(column[j]);
                 }
             }
         }
@@ -129,7 +129,7 @@ public class Field {
                 for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
 
                     if (column[j].isKilled()) {
-                        cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].yesShoot();
+                        cells[column[j].nearPoints[k].getX()][column[j].nearPoints[k].getY()].yesShoot();
                     }
 
                 }
@@ -159,8 +159,8 @@ public class Field {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 for (int k = 0; k < sizeSheep; k++) {
-                    if ((points[k].x == cells[i][j].getPositionHoriz()) &&
-                            (points[k].y == cells[i][j].getPositionVert()) &&
+                    if ((points[k].getX() == cells[i][j].getPositionHoriz()) &&
+                            (points[k].getY() == cells[i][j].getPositionVert()) &&
                             cells[i][j].isNearSheep()
                             ) {
                         System.out.println("Пересекает");
@@ -187,7 +187,7 @@ public class Field {
                 }
 
                 System.out.print(cells[i][j].getShowingCell());
-                GameController.setShowInWindow(i,j,cells[i][j].getShowingCell());
+                GameController.setShowInWindow(i, j, cells[i][j].getShowingCell());
             }
             System.out.println();
         }
@@ -207,7 +207,7 @@ public class Field {
                 }
 
                 System.out.print(cells[i][j].getShowingCell());
-                GameController.setShowInWindow1(i,j,cells[i][j].getShowingCell());
+                GameController.setShowInWindow1(i, j, cells[i][j].getShowingCell());
             }
             System.out.println();
         }

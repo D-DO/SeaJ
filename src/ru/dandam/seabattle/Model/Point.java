@@ -1,8 +1,8 @@
 package ru.dandam.seabattle.Model;
 
 public class Point {
-    public int x;
-    public int y;
+    private int x;
+    private int y;
 
 
     public Point() {

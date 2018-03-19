@@ -32,15 +32,15 @@ public class Sheep {
     public void initPoints(int size) {
         points = new Point[size];
         if (isHorizontal) {
-            points[0] = new Point(positionTopLeft.x, positionTopLeft.y); // массив координат ячеек корабля
+            points[0] = new Point(positionTopLeft.getX(), positionTopLeft.getY()); // массив координат ячеек корабля
             for (int i = 1; i < size; i++) {
-                points[i] = new Point(positionTopLeft.x, positionTopLeft.y + i);
+                points[i] = new Point(positionTopLeft.getX(), positionTopLeft.getY() + i);
             }
             printS();
         } else {
-            points[0] = new Point(positionTopLeft.x, positionTopLeft.y);
+            points[0] = new Point(positionTopLeft.getX(), positionTopLeft.getY());
             for (int i = 1; i < size; i++) {
-                points[i] = new Point(positionTopLeft.x + i, positionTopLeft.y);
+                points[i] = new Point(positionTopLeft.getX() + i, positionTopLeft.getY());
             }
             printS();
         }
@@ -51,11 +51,11 @@ public class Sheep {
 
         points = new Point[size];
         if (isHorizontal) {
-            tempPoint.x = positionTopLeft.x;
-            tempPoint.y = positionTopLeft.y + size;
+            tempPoint.setX(positionTopLeft.getX());
+            tempPoint.setY(positionTopLeft.getY() + size);
         } else {
-            tempPoint.y = positionTopLeft.y;
-            tempPoint.x = positionTopLeft.x + size;
+            tempPoint.setY(positionTopLeft.getY());
+            tempPoint.setX(positionTopLeft.getX() + size);
         }
         return tempPoint;
 
@@ -69,35 +69,35 @@ public class Sheep {
         if (isHorizontal()) {
 
             for (int i = 0; i < size; i++) {
-                nearPoints[i] = new Point(points[i].x - 1, points[i].y);
+                nearPoints[i] = new Point(points[i].getX() - 1, points[i].getY());
             }
             for (int i = 0; i < size; i++) {
-                nearPoints[i + size] = new Point(points[i].x, points[i].y);
+                nearPoints[i + size] = new Point(points[i].getX(), points[i].getY());
             }
             for (int i = 0; i < size; i++) {
-                nearPoints[i + size * 2] = new Point(points[i].x + 1, points[i].y);
+                nearPoints[i + size * 2] = new Point(points[i].getX() + 1, points[i].getY());
             }
             for (int i = 0; i < 3; i++) {
-                nearPoints[i + size * 3] = new Point(points[0].x + i - 1, points[0].y - 1);
+                nearPoints[i + size * 3] = new Point(points[0].getX() + i - 1, points[0].getY() - 1);
             }
             for (int i = 0; i < 3; i++) {
-                nearPoints[i + size * 3 + 3] = new Point(points[size - 1].x + i - 1, points[size - 1].y + 1);
+                nearPoints[i + size * 3 + 3] = new Point(points[size - 1].getX() + i - 1, points[size - 1].getY() + 1);
             }
         } else {
             for (int i = 0; i < size; i++) {
-                nearPoints[i] = new Point(points[i].x, points[i].y - 1);
+                nearPoints[i] = new Point(points[i].getX(), points[i].getY() - 1);
             }
             for (int i = 0; i < size; i++) {
-                nearPoints[i + size] = new Point(points[i].x, points[i].y);
+                nearPoints[i + size] = new Point(points[i].getX(), points[i].getY());
             }
             for (int i = 0; i < size; i++) {
-                nearPoints[i + size * 2] = new Point(points[i].x, points[i].y + 1);
+                nearPoints[i + size * 2] = new Point(points[i].getX(), points[i].getY() + 1);
             }
             for (int i = 0; i < 3; i++) {
-                nearPoints[i + size * 3] = new Point(points[0].x - 1, points[0].y + i - 1);
+                nearPoints[i + size * 3] = new Point(points[0].getX() - 1, points[0].getY() + i - 1);
             }
             for (int i = 0; i < 3; i++) {
-                nearPoints[i + size * 3 + 3] = new Point(points[size - 1].x + 1, points[size - 1].y + i - 1);
+                nearPoints[i + size * 3 + 3] = new Point(points[size - 1].getX() + 1, points[size - 1].getY() + i - 1);
             }
         }
         for (int i = 0; i < maxNumbersCellsNearSheep; i++) {
