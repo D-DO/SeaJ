@@ -1,15 +1,15 @@
 package ru.dandam.seabattle;
 
 public class Cell {
-    private int x;
-    private int y;
-    private String s;
-    private char c;
+    private int positionHoriz;
+    private int positionVert;
+    private String showingCell;
+    private char alphabeticDes;
     private boolean isShoot;
+    Sheep sheep;
+    private boolean nearSheep;
 
-    public char getC() {
-        return c;
-    }
+
 
     private char getCellChar(int p) {
         char s = 'А';
@@ -20,28 +20,64 @@ public class Cell {
     }
 
     public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.s = " - ";
-        this.c = getCellChar(x);
+        positionHoriz = x;
+        positionVert = y;
+        alphabeticDes = getCellChar(x);
+        isShoot = false;
+        sheep = null;
+
+        showingCell = showCell();
     }
 
-    public int getX() {
-        return x;
+    public String showCell() {
+        if (isShoot) {
+            if (sheep == null) {
+                return " * ";
+            } else {
+                return " X ";
+            }
+        } else {
+            if (sheep == null) {
+                return " _ ";
+            } else {
+                return " O ";
+            }
+        }
+
     }
 
-    public void setX(int x) {
-        this.x = x;
+
+    public int getPositionHoriz() {
+        return positionHoriz;
     }
 
-    public int getY() {
-        return y;
+    public void setPositionHoriz(int positionHoriz) {
+        this.positionHoriz = positionHoriz;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public int getPositionVert() {
+        return positionVert;
     }
 
+    public void setPositionVert(int positionVert) {
+        this.positionVert = positionVert;
+    }
+
+    public String getShowingCell() {
+        return showingCell;
+    }
+
+    public void setShowingCell(String showingCell) {
+        this.showingCell = showingCell;
+    }
+
+    public char getAlphabeticDes() {
+        return alphabeticDes;
+    }
+
+    public void setAlphabeticDes(char alphabeticDes) {
+        this.alphabeticDes = alphabeticDes;
+    }
 
     public boolean isShoot() {
         return isShoot;
@@ -49,13 +85,23 @@ public class Cell {
 
     public void setShoot(boolean shoot) {
         isShoot = shoot;
+        showingCell = showCell();
     }
 
-    public String getS() {
-        return s;
+    public Sheep getSheep() {
+        return sheep;
     }
 
-    public void setS(String s) {
-        this.s = s;
+    public void setSheep(Sheep sheep) {
+        this.sheep = sheep;
+        showingCell = showCell();
+    }
+
+    public boolean isNearSheep() {
+        return nearSheep;
+    }
+
+    public void setNearSheep(boolean nearSheep) {
+        this.nearSheep = nearSheep;
     }
 }
