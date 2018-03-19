@@ -29,29 +29,23 @@ public class Point {
         }
     }
 
-    static Point getRandomPoint(int sizeSheep, boolean horizontal) {
-        Point tempPoint = new Point();
-        Random random = new Random();
-
-
-        if (sizeSheep > 1) {
-            if (horizontal) {
-                tempPoint.x = random.nextInt(9 - sizeSheep);
-                tempPoint.y = random.nextInt(9);
-            } else {
-                tempPoint.x = random.nextInt(9);
-                tempPoint.y = random.nextInt(9 - sizeSheep);
-
-            }
-        } else {
-            tempPoint.x = random.nextInt(9);
-            tempPoint.y = random.nextInt(9);
-        }
-
-
-        return tempPoint;
-
-    }
+//    static Point getRandomPoint(int sizeSheep, boolean horizontal) {
+//        Point tempPoint = new Point();
+//        Random random = new Random();
+//        if (sizeSheep > 1) {
+//            if (horizontal) {
+//                tempPoint.x = random.nextInt(9 - sizeSheep);
+//                tempPoint.y = random.nextInt(9);
+//            } else {
+//                tempPoint.x = random.nextInt(9);
+//                tempPoint.y = random.nextInt(9 - sizeSheep);
+//            }
+//        } else {
+//            tempPoint.x = random.nextInt(9);
+//            tempPoint.y = random.nextInt(9);
+//        }
+//        return tempPoint;
+//    }
 
     @Override
     public String toString() {

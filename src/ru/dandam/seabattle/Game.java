@@ -19,8 +19,8 @@ public class Game {
         user1.field.initCells();
         user2.field.initCells();
 
-        user1.field.InitSheep();
-        user2.field.InitSheep();
+        user1.field.initSheep();
+        user2.field.initSheep();
 
 
 
@@ -34,7 +34,11 @@ public class Game {
         printCellsUser1User2();
 
 
-        user1.field.cells[1][1].setShoot(true);
+        user1.field.cells[0][0].yesShoot();
+        user1.field.cells[0][1].yesShoot();
+        user1.field.isKilledSheep();
+
+
 
         System.out.println(" Введите координаты выстрела: ");
         //userMessage = scanner.nextLine();
@@ -42,7 +46,17 @@ public class Game {
 
         printCellsUser1User2();
 
-        System.out.println(Point.getRandomPoint(4, true));
+
+
+        System.out.println(" Введите координаты выстрела: ");
+       // userMessage = scanner.nextLine();
+        System.out.println(userMessage);
+
+        user1.field.cells[0][2].yesShoot();
+        user1.field.cells[0][3].yesShoot();
+        user1.field.isKilledSheep();
+        printCellsUser1User2();
+       // System.out.println(Point.getRandomPoint(4, true));
 
     }
 

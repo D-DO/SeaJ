@@ -10,7 +10,6 @@ public class Cell {
     private boolean nearSheep;
 
 
-
     private char getCellChar(int p) {
         char s = 'А';
         for (int i = 0; i < p; i++) {
@@ -29,20 +28,37 @@ public class Cell {
     }
 
     public String showCell() {
-        if (isShoot) {
-            if (sheep == null) {
-                return " * ";
-            } else {
-                return " X ";
-            }
-        } else {
-            if (sheep == null) {
-                return " _ ";
-            } else {
-                return " O ";
-            }
-        }
 
+
+            if (isShoot) {
+                if (sheep == null) {
+                    return " + ";
+                }
+                 else {
+                    return " X ";
+                }
+
+
+            } else {
+                if (sheep == null) {
+                    return " ~ ";
+                } else {
+                    return " O ";
+                }
+
+            }
+//        if (sheep != null) {
+//
+//            return " O ";
+//        }
+//        if ( nearSheep) {
+//            return " # ";
+//        }
+//        if (sheep == null) {
+//            return " - ";
+//        }
+//
+//        return " - ";
     }
 
 
@@ -84,6 +100,21 @@ public class Cell {
 
     public void setShoot(boolean shoot) {
         isShoot = shoot;
+        if (shoot){
+            if (sheep!=null){
+                sheep.incSoots();
+            }
+
+        }
+        showingCell = showCell();
+    }
+
+    public void yesShoot() {
+        isShoot = true;
+        if (sheep!=null){
+            sheep.incSoots();
+        }
+
         showingCell = showCell();
     }
 
@@ -102,6 +133,7 @@ public class Cell {
 
     public void setNearSheep(boolean nearSheep) {
         this.nearSheep = nearSheep;
+        showingCell = showCell();
     }
 
 

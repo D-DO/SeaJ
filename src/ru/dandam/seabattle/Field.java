@@ -7,9 +7,42 @@ public class Field {
     private int size;
     Sheep[][] sheep;
     Cell[][] cells = new Cell[10][10];
+    Point tempPositionTopLeftOfSheep = new Point();
+    Point[] tempPointsOfSheep;//// массив координат ячеек корабля
 
 
-    public void InitSheep() {
+    public void getRandomPoint(int sizeSheep, boolean horizontal) {
+        Random random = new Random();
+
+        if (horizontal) {
+            tempPositionTopLeftOfSheep.y = random.nextInt(10 - sizeSheep + 1);
+            tempPositionTopLeftOfSheep.x = random.nextInt(10);
+        } else {
+            tempPositionTopLeftOfSheep.x = random.nextInt(10);
+            tempPositionTopLeftOfSheep.x = random.nextInt(10 - sizeSheep + 1);
+        }
+        if (sizeSheep == 4) {
+            tempPositionTopLeftOfSheep.y = 0;
+            tempPositionTopLeftOfSheep.x = 0;
+        }
+    }
+
+    public void initPoints(int sizeSheep, Point positionTopLeft, boolean horizontal) {
+        tempPointsOfSheep = new Point[sizeSheep];
+        if (horizontal) {
+            tempPointsOfSheep[0] = new Point(positionTopLeft.x, positionTopLeft.y); // массив координат ячеек корабля
+            for (int i = 1; i < sizeSheep; i++) {
+                tempPointsOfSheep[i] = new Point(positionTopLeft.x, positionTopLeft.y + i);
+            }
+        } else {
+            tempPointsOfSheep[0] = new Point(positionTopLeft.x, positionTopLeft.y);
+            for (int i = 1; i < sizeSheep; i++) {
+                tempPointsOfSheep[i] = new Point(positionTopLeft.x + i, positionTopLeft.y);
+            }
+        }
+    }
+
+    public void initSheep() {
         sheep = new Sheep[4][];
         sheep[0] = new Sheep[1];
         sheep[1] = new Sheep[2];
@@ -24,31 +57,60 @@ public class Field {
 
                 do {
                     horizontal = random.nextBoolean();
-                    column[j] = new Sheep(Point.getRandomPoint(4 - i, horizontal), 4 - i, horizontal);
-                } while (sheepIntersection(column[j]));
+                    getRandomPoint(4 - i, horizontal);
+                    initPoints(4 - i, tempPositionTopLeftOfSheep, horizontal);
 
-                for (int k = 0; k < column[j].getSize(); k++) {
-                    cells[column[j].points[k].x][column[j].points[k].y].setSheep(column[j]);
-                }
-                for (int k = 0; k < column[j].numbersCellsNearSheep; k++) {
+                } while (sheepIntersection(tempPointsOfSheep, 4 - i));
+
+                column[j] = new Sheep(tempPositionTopLeftOfSheep, 4 - i, horizontal);
+
+
+                for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
                     // if (cellsUser1[column[j].points[k].x][column[j].points[k].y].getSheep() == null) {
                     cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].setNearSheep(true);
+                    System.out.println(column[j].nearPoints[k].x + " " + column[j].nearPoints[k].y + " #");
                     //   }
 
+                }
+                for (int k = 0; k < column[j].getSize(); k++) {
+                    cells[column[j].points[k].x][column[j].points[k].y].setSheep(column[j]);
                 }
             }
         }
 
     }
 
-    public boolean sheepIntersection(Sheep sheep)   {
+    public void isKilledSheep() {
+
+
+        for (int i = 0; i < sheep.length; i++) {
+            Sheep[] column = sheep[i];
+            for (int j = 0; j < column.length; j++) {
+
+                for (int k = 0; k < column[j].maxNumbersCellsNearSheep; k++) {
+
+                    if (column[j].isKilled()){
+                        cells[column[j].nearPoints[k].x][column[j].nearPoints[k].y].yesShoot();
+                    }
+
+                }
+//                for (int k = 0; k < column[j].getSize(); k++) {
+//                    cells[column[j].points[k].x][column[j].points[k].y].setSheep(column[j]);
+//                }
+            }
+        }
+
+    }
+
+    public boolean sheepIntersection(Point[] points, int sizeSheep) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                for (int k = 0; k < sheep.getSize(); k++) {
-                    if ((sheep.points[k].x == cells[i][j].getPositionHoriz()) &&
-                            (sheep.points[k].y == cells[i][j].getPositionVert()) &&
+                for (int k = 0; k < sizeSheep; k++) {
+                    if ((points[k].x == cells[i][j].getPositionHoriz()) &&
+                            (points[k].y == cells[i][j].getPositionVert()) &&
                             cells[i][j].isNearSheep()
                             ) {
+                        System.out.println("Пересекает");
                         return true;
 
                     }
@@ -56,10 +118,9 @@ public class Field {
 
             }
         }
+        System.out.println("Ok");
         return false;
     }
-
-
 
 
     public void initCells() {
@@ -70,7 +131,7 @@ public class Field {
         }
     }
 
-    public void printCells( ) {
+    public void printCells() {
         printHeadNumber(1);
         System.out.println();
         for (int i = 0; i < 10; i++) {
