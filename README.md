@@ -1,1 +1,1 @@
-<p Sea Battle on Java /p>
+<p> Sea Battle on Java </p>
